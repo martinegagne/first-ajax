@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
       var section = document.querySelectorAll('section')
       msg.innerText = "Woops something went wrong, we'll try harder next time!";
       section[1].append(msg);
+    }).always(function() {
+      console.log("Hey the request finished!");
     });
   });
 
