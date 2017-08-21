@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var button = document.getElementById('request_to_root_button')
   var buttonPingPong = document.getElementById('request_to_ping_pong_button')
-
+  var buttonCount = document.getElementById('request_to_count')
+ // SECTION 1, 2
   button.addEventListener( 'click', function() {
     var request = $.ajax({
       url: "http://first-ajax-api.herokuapp.com/",
@@ -16,13 +17,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+// SECTION 3, 4, 5, 6
   buttonPingPong.addEventListener( 'click', function() {
     var pingPongRequest = $.ajax({
       url: "http://first-ajax-api.herokuapp.com/pong",
       method: 'GET',
       dataType: 'text'
-    });
-  pingPongRequest.done(function(responseData) {
+
+    }).done(function(responseData) {
     var section = document.querySelectorAll('section')
     var sendResponse = document.createElement('div');
     sendResponse.innerHTML = responseData;
@@ -32,14 +34,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log("REQUEST FAIL")
-
       var msg = document.createElement( 'p' );
       var section = document.querySelectorAll('section')
       msg.innerText = "Woops something went wrong, we'll try harder next time!";
       section[1].append(msg);
+
     }).always(function() {
       console.log("Hey the request finished!");
     });
   });
 
+// SECTION 7
+buttonCount.addEventListener( 'click', function() {
+  var pingPongRequest = $.ajax({
+    url: "http://first-ajax-api.herokuapp.com/count",
+    method: 'GET',
+    dataType: 'text'
+  }).done(function(responseData) {
+  var section = document.querySelectorAll('section')
+  var sendResponse = document.createElement('div');
+  sendResponse.innerHTML = responseData;
+  section[2].append(responseData);
+    console.log('responseData');
+    console.log('REQUEST SUCCEEDED');
+    });
+  });
 });
+// SECTION 8
+
+// SECTION 9
