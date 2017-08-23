@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var buttonPingPong = document.getElementById('request_to_ping_pong_button')
   var buttonCount = document.getElementById('request_to_count')
   var buttonTime = document.getElementById('request_to_time')
+  var buttonCar = document.getElementById('request_to_car')
 
  // SECTION 1, 2
   button.addEventListener( 'click', function() {
@@ -78,6 +79,20 @@ buttonTime.addEventListener( 'click', function() {
     console.log('REQUEST SUCCEEDED');
     });
   });
-});
 
 // SECTION 9
+buttonCar.addEventListener( 'click', function() {
+  var request = $.ajax({
+    url: "http://first-ajax-api.herokuapp.com/a_car",
+    method: 'GET',
+    dataType: 'html'
+  }).done(function(responseData) {
+      var section = document.querySelectorAll('section')
+      var carList = document.querySelector('#car_list');
+      sendResponseToList = responseData;
+      carList.append(responseData);
+        console.log('responseData');
+        console.log('REQUEST SUCCEEDED');
+    });
+  });
+});
