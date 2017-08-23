@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var button = document.getElementById('request_to_root_button')
   var buttonPingPong = document.getElementById('request_to_ping_pong_button')
   var buttonCount = document.getElementById('request_to_count')
+  var buttonTime = document.getElementById('request_to_time')
+
  // SECTION 1, 2
   button.addEventListener( 'click', function() {
     var request = $.ajax({
@@ -34,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log("REQUEST FAIL")
-      var msg = document.createElement( 'p' );
-      var section = document.querySelectorAll('section')
-      msg.innerText = "Woops something went wrong, we'll try harder next time!";
-      section[1].append(msg);
+        var msg = document.createElement( 'p' );
+        var section = document.querySelectorAll('section')
+        msg.innerText = "Woops something went wrong, we'll try harder next time!";
+        section[1].append(msg);
 
     }).always(function() {
-      console.log("Hey the request finished!");
+        console.log("Hey the request finished!");
     });
   });
 
@@ -51,15 +53,31 @@ buttonCount.addEventListener( 'click', function() {
     method: 'GET',
     dataType: 'text'
   }).done(function(responseData) {
+      var section = document.querySelectorAll('section')
+      var sendResponse = document.createElement('div');
+      sendResponse.innerHTML = responseData;
+      section[2].append(responseData);
+        console.log('responseData');
+        console.log('REQUEST SUCCEEDED');
+    });
+  });
+
+// SECTION 8
+buttonTime.addEventListener( 'click', function() {
+  var request = $.ajax({
+    url: "http://first-ajax-api.herokuapp.com/time",
+    method: 'GET',
+    data: {timezone: 'Europe/Sofia'},
+    dataType: 'text'
+  }).done(function(responseData) {
   var section = document.querySelectorAll('section')
   var sendResponse = document.createElement('div');
   sendResponse.innerHTML = responseData;
-  section[2].append(responseData);
+  section[3].append(responseData);
     console.log('responseData');
     console.log('REQUEST SUCCEEDED');
     });
   });
 });
-// SECTION 8
 
 // SECTION 9
